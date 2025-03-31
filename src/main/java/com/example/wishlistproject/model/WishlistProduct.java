@@ -3,20 +3,14 @@ package com.example.wishlistproject.model;
 import java.time.LocalDate;
 
 public class WishlistProduct {
-    private int wishlistProductId;
     private int wishlistId;
     private int productId;
     private LocalDate dateAdded;
 
     public WishlistProduct(int wishlistProductId, int wishlistId, int productId, LocalDate dateAdded){
-        this.wishlistProductId = wishlistProductId;
         this.wishlistId = wishlistId;
         this.productId = productId;
         this.dateAdded = dateAdded;
-    }
-
-    public int getWishlistProductId() {
-        return wishlistProductId;
     }
 
     public int getWishlistId() {
@@ -29,10 +23,6 @@ public class WishlistProduct {
 
     public LocalDate getDateAdded() {
         return dateAdded;
-    }
-
-    public void setWishlistProductId(int wishlistProductId) {
-        this.wishlistProductId = wishlistProductId;
     }
 
     public void setWishlistId(int wishlistId) {
@@ -50,8 +40,7 @@ public class WishlistProduct {
     @Override
     public String toString() {
         return "WishlistProduct{" +
-                "wishlistProductId=" + wishlistProductId +
-                ", wishlistId=" + wishlistId +
+                "wishlistId=" + wishlistId +
                 ", productId=" + productId +
                 ", dateAdded=" + dateAdded +
                 '}';

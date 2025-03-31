@@ -1,17 +1,19 @@
 package com.example.wishlistproject.model;
 
 public class Wishlist {
-    private int wishlistId;
+    private Long wishlistId;
     private String name;
     private String description;
+    private String ownerId;
 
-    public Wishlist(int wishlistId, String name, String description){
+    public Wishlist(Long wishlistId, String name, String description, String ownerId){
         this.wishlistId = wishlistId;
         this.name = name;
         this.description = description;
+        this.ownerId = ownerId;
     }
 
-    public int getWishlistId() {
+    public Long getWishlistId() {
         return wishlistId;
     }
 
@@ -23,7 +25,7 @@ public class Wishlist {
         return description;
     }
 
-    public void setWishlistId(int wishlistId) {
+    public void setWishlistId(Long wishlistId) {
         this.wishlistId = wishlistId;
     }
 
@@ -35,12 +37,21 @@ public class Wishlist {
         this.description = description;
     }
 
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
     @Override
     public String toString() {
         return "Wishlist{" +
                 "wishlistId=" + wishlistId +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", ownerId='" + ownerId + '\'' +
                 '}';
     }
 }
