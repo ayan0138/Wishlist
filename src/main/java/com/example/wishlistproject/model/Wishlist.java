@@ -4,13 +4,17 @@ public class Wishlist {
     private Long wishlistId;
     private String name;
     private String description;
-    private String owner;
+    private int ownerId;
 
     public Wishlist(){
+
+    }
+
+    public Wishlist(Long wishlistId, String name, String description, int ownerId) {
         this.wishlistId = wishlistId;
         this.name = name;
         this.description = description;
-        this.owner = owner;
+        this.ownerId = ownerId;
     }
 
     public Long getWishlistId() {
@@ -25,6 +29,10 @@ public class Wishlist {
         return description;
     }
 
+    public int getOwnerId() {
+        return ownerId;
+    }
+
     public void setWishlistId(Long wishlistId) {
         this.wishlistId = wishlistId;
     }
@@ -37,21 +45,12 @@ public class Wishlist {
         this.description = description;
     }
 
-    public String getOwner() {
-        return owner;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
-    public void setOwner(User user) {
-        this.owner = owner;
+    public void setOwner(User owner) {
+        this.ownerId = ownerId;
     }
 
-    @Override
-    public String toString() {
-        return "Wishlist{" +
-                "wishlistId=" + wishlistId +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", owner='" + owner + '\'' +
-                '}';
-    }
 }
