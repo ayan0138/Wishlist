@@ -25,13 +25,21 @@ public class WishlistService {
         Wishlist wishlist = new Wishlist();
         wishlist.setName(name);
         wishlist.setDescription(description);
-        wishlist.setOwner(user);
+        wishlist.setUser(user);
 
         return wishlistRepository.save(wishlist);
     }
 
+    public Wishlist saveWishlist(Wishlist wishlist){
+       return wishlistRepository.save(wishlist); /** Save the wishlist object to the database **/
+    }
+
     // Hent alle ønskesedler for en bestemt bruger
     public List<Wishlist> getWishlistsForUser(Long userId) {
-        return wishlistRepository.findUserById(userId);
+        return wishlistRepository.findByUser_userId(userId); // matcher repository
+    }
+
+    public List<Wishlist> getAllWishlists() {
+        return wishlistRepository.findAll();
     }
 }

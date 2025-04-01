@@ -1,16 +1,31 @@
 package com.example.wishlistproject.model;
 
+import jakarta.persistence.*;
+
+
+@Entity
 public class Wishlist {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wishlistId;
+
     private String name;
     private String description;
-    private String owner;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
 
     public Wishlist(){
+    }
+
+    public Wishlist(Long wishlistId, String name, String description, User user) {
         this.wishlistId = wishlistId;
         this.name = name;
         this.description = description;
-        this.owner = owner;
+        this.user = user;
+
     }
 
     public Long getWishlistId() {
@@ -25,6 +40,8 @@ public class Wishlist {
         return description;
     }
 
+
+
     public void setWishlistId(Long wishlistId) {
         this.wishlistId = wishlistId;
     }
@@ -37,21 +54,11 @@ public class Wishlist {
         this.description = description;
     }
 
-    public String getOwner() {
-        return owner;
+    public User getUser() {
+        return user;
     }
 
-    public void setOwner(User user) {
-        this.owner = owner;
-    }
-
-    @Override
-    public String toString() {
-        return "Wishlist{" +
-                "wishlistId=" + wishlistId +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", owner='" + owner + '\'' +
-                '}';
+    public void setUser(User user) {
+        this.user = user;
     }
 }
