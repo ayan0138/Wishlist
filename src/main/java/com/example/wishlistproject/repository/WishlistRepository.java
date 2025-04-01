@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface WishlistRepository extends JpaRepository <Wishlist, Long> {
     // Find alle ønskesedler for en bestemt bruger
-    List<Wishlist> findUserById(Long userId);
+    List<Wishlist> findByUser_userId(Long userId);
 }

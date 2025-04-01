@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alle Ønskelister</title>
+</head>
+<body>
+    <h1>Ønskelister</h1>
+
+    <ul>
+        <li th:each="wishlist : ${wishlists}">
+            <strong th:text="${wishlist.name}">Titel</strong> -
+            <span th:text="${wishlist.description}"></span>
+        </li>
+    </ul>
+
+    <a th:href="@{/wishlist/create}">Opret ny ønskeliste</a>
+</body>
+</html>
