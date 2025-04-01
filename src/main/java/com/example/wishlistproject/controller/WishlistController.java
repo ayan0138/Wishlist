@@ -28,4 +28,6 @@ public class WishlistController {
         Wishlist saved = wishlistService.createWishlist(name, description, userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
+
+    // For push
 }
