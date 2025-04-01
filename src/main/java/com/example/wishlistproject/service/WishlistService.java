@@ -30,6 +30,10 @@ public class WishlistService {
         return wishlistRepository.save(wishlist);
     }
 
+    public Wishlist saveWishlist(Wishlist wishlist){
+       return wishlistRepository.save(wishlist); /** Save the wishlist object to the database **/
+    }
+
     // Hent alle ønskesedler for en bestemt bruger
     public List<Wishlist> getWishlistsForUser(Long userId) {
         return wishlistRepository.findUserById(userId);
