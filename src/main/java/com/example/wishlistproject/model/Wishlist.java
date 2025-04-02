@@ -28,6 +28,9 @@ public class Wishlist {
 
     }
 
+    public Wishlist(int wishlistId, String Ønskeseddel, String Ønsker, int ønskerId) {
+    }
+
     public Long getWishlistId() {
         return wishlistId;
     }
