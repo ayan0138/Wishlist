@@ -30,7 +30,7 @@ body {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    display: flex;
+    display:  flex; //hidden
     justify-content: center;
     align-items: center;
 }
@@ -150,4 +150,49 @@ h1 {
 
 .opret-btn:hover {
     background-color: #1e7e34; /* Darker green on hover */
+}
+
+/* Social Login Buttons */
+.social-login-buttons {
+    margin-top: 20px;
+}
+
+.social-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #4c4c4c; /* Default gray */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.social-btn:hover {
+    background-color: #3a3a3a; /* Darker gray on hover */
+}
+
+/* Specific styles for each button */
+.icloud-btn {
+    background-color: #8b8b8b; /* iCloud button color */
+}
+
+.icloud-btn:hover {
+    background-color: #666; /* Darker iCloud color on hover */
+}
+
+.facebook-btn {
+    background-color: #3b5998; /* Facebook color */
+}
+
+.facebook-btn:hover {
+    background-color: #2d4373; /* Darker Facebook color on hover */
+}
+
+.gmail-btn {
+    background-color: #d14836; /* Gmail color */
+}
+
+.gmail-btn:hover {
+    background-color: #c13521; /* Darker Gmail color on hover */
 }
