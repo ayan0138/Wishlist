@@ -13,6 +13,9 @@ public class Product {
         this.description = description;
     }
 
+    public Product(int productId, String description, String product, double price, String link) {
+    }
+
     public int getProductId() {
         return productId;
     }

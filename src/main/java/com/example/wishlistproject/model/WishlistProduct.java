@@ -13,6 +13,9 @@ public class WishlistProduct {
         this.dateAdded = dateAdded;
     }
 
+    public WishlistProduct(int wishlistProductId, int wishlistId) {
+    }
+
     public int getWishlistId() {
         return wishlistId;
     }

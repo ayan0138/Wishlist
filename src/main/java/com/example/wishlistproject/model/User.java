@@ -18,7 +18,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Wishlist> wishlists;
 
-    public User() {
+    public User(int i, String mail, String ayan, String hashedPassword1) {
     }
 
     public User(Long userId, String email, String name, String password) {
@@ -26,6 +26,10 @@ public class User {
         this.email = email;
         this.name = name;
         this.password = password;
+    }
+
+    public User() {
+
     }
 
     // Getters and setters
