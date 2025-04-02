@@ -4,44 +4,64 @@ import com.example.wishlistproject.model.Wishlist;
 import com.example.wishlistproject.service.WishlistService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-;
+import org.springframework.web.bind.annotation.*;
+
 
 @Controller
-@RequestMapping("/wishlist")
+@RequestMapping("/") // Previously ("/wishlist") -> removed!
 public class WishlistController {
+
     private final WishlistService wishlistService;
 
     public WishlistController(WishlistService wishlistService) {
         this.wishlistService = wishlistService;
     }
 
-    // 👇 GET: Viser formularen
+    // 👇 GET: Displays the form to create a wishlist
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("wishlist", new Wishlist());
-        return "create-wishlist"; // svarer til create-wishlist.html
+        return "create-wishlist"; // corresponds to create-wishlist.html
     }
 
-
-    // 👇 Post behandler formularen
+    // 👇 POST: Processes the form for creating a wishlist
     @PostMapping("/create")
     public String createWishlist(@ModelAttribute Wishlist wishlist, Model model) {
         wishlistService.createWishlist(
                 wishlist.getName(),
                 wishlist.getDescription(),
-                1L // 👈  Bruger-id skal sættes korrekt (fx fra session) -
-                // Midlertidigt hardcoded userId, indtil vi har login/session
+                1L // User-id should be set correctly (e.g., from session)
         );
-        return "redirect:/";  // 👈Eller en side hvor du viser ønskelisten
+        return "redirect:/wishlist/list"; // Redirect to wishlist view
     }
 
     @GetMapping("/list")
     public String showAllWishlists(Model model) {
         model.addAttribute("wishlists", wishlistService.getAllWishlists());
-        return "wishlist-list"; //  svarer til wishlist-list.html
+        return "wishlist-list"; // corresponds to wishlist-list.html
+    }
+
+    // 👇 GET: Displays the login form
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login-front";  // This returns login.html
+    }
+
+    // 👇 POST: Handles the login form submission
+    @PostMapping("/login")
+    public String processLogin(@RequestParam String email, @RequestParam String password, Model model) {
+        // Here, you would validate the user credentials (e.g., check DB)
+        if ("user@example.com".equals(email) && "password".equals(password)) {
+            return "redirect:/wishlist/list";
+        } else {  // Modal doesn't work currently
+            model.addAttribute("error", "Invalid email or password");
+            return "login-front";  // Reload login page with error message
+        }
+    }
+
+    // 👇 GET: Displays the welcome page after successful login
+    @GetMapping("/welcome")
+    public String showWelcomePage() {
+        return "welcome";  // This renders the welcome page after login
     }
 }
