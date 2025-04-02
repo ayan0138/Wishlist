@@ -1,5 +1,5 @@
 package com.example.wishlistproject.model;
-//comments
+//comments!
 public class LoginModel {
 
     public static class LoginForm {
