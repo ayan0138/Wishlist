@@ -2,6 +2,7 @@ package com.example.wishlistproject.controller;
 
 import com.example.wishlistproject.model.Wishlist;
 import com.example.wishlistproject.service.WishlistService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,19 +30,32 @@ public class WishlistController {
 
     // 👇 Post behandler formularen
     @PostMapping("/create")
-    public String createWishlist(@ModelAttribute Wishlist wishlist, Model model) {
+    public String createWishlist(@ModelAttribute Wishlist wishlist, HttpSession session, Model model) {
+        Object userIdObj = session.getAttribute("userId");
+
+        if (userIdObj == null) {
+            return "redirect:/login"; //dette sker hvis brugeren ikke er logget ind
+        }
+
+        Long userId = Long.valueOf(userIdObj.toString());
+
         wishlistService.createWishlist(
                 wishlist.getName(),
                 wishlist.getDescription(),
-                1L // 👈  Bruger-id skal sættes korrekt (fx fra session) -
-                // Midlertidigt hardcoded userId, indtil vi har login/session
+                userId
         );
-        return "redirect:/";  // 👈Eller en side hvor du viser ønskelisten
+        return "redirect:/list";  // Man kan se sin ønseklister
     }
 
     @GetMapping("/list")
-    public String showAllWishlists(Model model) {
-        model.addAttribute("wishlists", wishlistService.getAllWishlists());
+    public String showUserWishlists(HttpSession session,Model model) {
+        Object userIdObj = session.getAttribute("userId");
+
+        if (userIdObj == null){
+            return "redirect:/login";
+        }
+        Long userId = Long.valueOf(userIdObj.toString());
+        model.addAttribute("wishlists", wishlistService.getWishlistsForUser(userId));
         return "wishlist-list"; //  svarer til wishlist-list.html
     }
 }

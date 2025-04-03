@@ -39,7 +39,5 @@ public class WishlistService {
         return wishlistRepository.findByUser_userId(userId); // matcher repository
     }
 
-    public List<Wishlist> getAllWishlists() {
-        return wishlistRepository.findAll();
-    }
+
 }
