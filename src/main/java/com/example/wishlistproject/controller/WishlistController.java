@@ -1,12 +1,11 @@
 package com.example.wishlistproject.controller;
-
 import com.example.wishlistproject.model.Wishlist;
 import com.example.wishlistproject.service.WishlistService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
+//hi
 @Controller
 @RequestMapping("/") // Previously ("/wishlist") -> removed!
 public class WishlistController {
