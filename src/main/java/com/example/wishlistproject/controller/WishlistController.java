@@ -1,6 +1,9 @@
 package com.example.wishlistproject.controller;
+import com.example.wishlistproject.model.User;
 import com.example.wishlistproject.model.Wishlist;
+import com.example.wishlistproject.service.UserService;
 import com.example.wishlistproject.service.WishlistService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +14,11 @@ import org.springframework.web.bind.annotation.*;
 public class WishlistController {
 
     private final WishlistService wishlistService;
+    private final UserService userService;
 
-    public WishlistController(WishlistService wishlistService) {
+    public WishlistController(WishlistService wishlistService, UserService userService) {
         this.wishlistService = wishlistService;
+        this.userService = userService;
     }
 
     // 👇 GET: Displays the form to create a wishlist
@@ -35,8 +40,14 @@ public class WishlistController {
     }
 
     @GetMapping("/list")
-    public String showAllWishlists(Model model) {
-        model.addAttribute("wishlists", wishlistService.getAllWishlists());
+    public String specifikUserList(HttpSession session, Model model) {
+        Object userIdobj = session.getAttribute("userId");
+        if (userIdobj == null){
+            return "redirect:/login";
+
+        }
+        Long userId = Long.valueOf(userIdobj.toString());
+        model.addAttribute("wishlists", wishlistService.getWishlistsForUser(userId));
         return "wishlist-list"; // corresponds to wishlist-list.html
     }
 
@@ -47,14 +58,19 @@ public class WishlistController {
     }
 
     // 👇 POST: Handles the login form submission
+    // en session timeout er pr. default 15 minutter.
     @PostMapping("/login")
-    public String processLogin(@RequestParam String email, @RequestParam String password, Model model) {
+    public String processLogin(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
         // Here, you would validate the user credentials (e.g., check DB)
-        if ("user@example.com".equals(email) && "password".equals(password)) {
-            return "redirect:/wishlist/list";
-        } else {  // Modal doesn't work currently
-            model.addAttribute("error", "Invalid email or password");
-            return "login-front";  // Reload login page with error message
+        User user = userService.loginUser(email, password);
+
+        if (user !=null) {
+            session.setAttribute("userId", user.getUserId());
+            return "redirect:/list";
+        } else {
+            model.addAttribute("error", "Forkert email eller adgangskode");
+            return "login-front";
+
         }
     }
 
