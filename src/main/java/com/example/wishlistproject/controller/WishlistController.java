@@ -59,3 +59,4 @@ public class WishlistController {
         return "wishlist-list"; //  svarer til wishlist-list.html
     }
 }
+//gg
