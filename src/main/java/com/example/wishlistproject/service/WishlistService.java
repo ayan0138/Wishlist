@@ -18,13 +18,14 @@ public class WishlistService {
         this.userRepository = userRepository;
     }
 
-    public Wishlist createWishlist(String name, String description, Long userId) {
+    public Wishlist createWishlist(String name, String description, String imageUrl,Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Bruger ikke fundet"));
 
         Wishlist wishlist = new Wishlist();
         wishlist.setName(name);
         wishlist.setDescription(description);
+        wishlist.setImageUrl(imageUrl);
         wishlist.setUser(user);
 
         return wishlistRepository.save(wishlist);

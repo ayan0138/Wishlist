@@ -1,19 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Alle Ønskelister</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mine Ønskelister</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/wishlist-list.css}" />
 </head>
 <body>
-    <h1>Ønskelister</h1>
+<nav class="navbar">
+    <div class="site-name">Drømmelisten</div>
+    <div class="nav-buttons">
+        <a href="/wishlist/create" class="btn-primary">Opret ny Ønskeliste</a>
+        <a href="/user/profile" class="btn-secondary">Tilpas kontooplysninger</a>
+    </div>
+</nav>
 
-    <ul>
-        <li th:each="wishlist : ${wishlists}">
-            <strong th:text="${wishlist.name}">Titel</strong> -
-            <span th:text="${wishlist.description}"></span>
-        </li>
-    </ul>
+<div class="content">
+    <h1 class="page-title">Mine ønskelister</h1>
 
-    <a th:href="@{/wishlist/create}">Opret ny ønskeliste</a>
+    <div class="wishlist-grid">
+        <!-- Loop through existing wishlists -->
+        <div th:each="wishlist, iterStat : ${wishlists}" class="wishlist-card">
+            <div class="card-content">
+                <div class="card-number" th:text="${iterStat.count} + '.'"></div>
+                <div class="card-title" th:text="${wishlist.name}">Fik ikke fat i navnet</div>
+
+                <div class="card-image">
+                    <!-- Display wishlist image if available -->
+                    <img th:if="${wishlist.imageUrl != null}" th:src="${wishlist.imageUrl}" alt="Wishlist Billede">
+                    <!-- Display fallback image if no wishlist image -->
+                    <img th:unless="${wishlist.imageUrl != null}" th:src="@{/images/thought.jpg}" alt="Billedet blev ikke indlæst">
+                </div>
+
+                <div class="card-description">
+                    <p th:text="${wishlist.description}"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Placeholder card if no wishlists exist -->
+        <div th:if="${wishlists.isEmpty()}" class="wishlist-card placeholder-card">
+            <div class="card-content">
+                <div class="placeholder-image">
+                    <img th:src="@{/images/thought.jpg}" alt="Thought Cloud">
+                </div>
+                <div class="placeholder-text">
+                    Tilføj flere ønskelister for at se dem her...
+                </div>
+            </div>
+        </div>
+
+        <!-- If we have wishlists but not many, show a placeholder -->
+        <div th:if="${!wishlists.isEmpty() && wishlists.size() < 6}" class="wishlist-card placeholder-card">
+            <div class="card-content">
+                <div class="placeholder-image">
+                    <img th:src="@{/images/thought.jpg}" alt="Image did not load">
+                </div>
+                <div class="placeholder-text">
+                    Tilføj flere ønskelister for at se dem her...
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty placeholder cards -->
+        <div th:if="${wishlists.size() < 5}" th:each="i : ${#numbers.sequence(wishlists.size() + 1 + (wishlists.isEmpty() ? 0 : 1), 5)}"
+             class="wishlist-card empty-card">
+        </div>
+    </div>
+</div>
 </body>
 </html>

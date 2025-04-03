@@ -33,6 +33,7 @@ public class WishlistController {
         wishlistService.createWishlist(
                 wishlist.getName(),
                 wishlist.getDescription(),
+                wishlist.getImageUrl(),
                 1L // 👈  Bruger-id skal sættes korrekt (fx fra session) -
                 // Midlertidigt hardcoded userId, indtil vi har login/session
         );
