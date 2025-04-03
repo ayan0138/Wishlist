@@ -58,7 +58,7 @@ public class WishlistController {
     }
 
     // 👇 POST: Handles the login form submission
-    // en session timeout er pr. default 15 minutter.
+    // en session timeout er pr. default 15 minutter
     @PostMapping("/login")
     public String processLogin(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
         // Here, you would validate the user credentials (e.g., check DB)
