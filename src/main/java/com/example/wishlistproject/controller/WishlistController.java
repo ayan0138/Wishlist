@@ -77,6 +77,7 @@ public class WishlistController {
         }
     }
     // 👇 GET: Displays the welcome page after successful login
+    //ok
     @GetMapping("/welcome")
     public String showWelcomePage() {
         return "welcome";  // This renders the welcome page after login
