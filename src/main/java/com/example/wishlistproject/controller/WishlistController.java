@@ -52,14 +52,16 @@ public class WishlistController {
     }
 
     // 👇 GET: Displays the login form
-    @GetMapping("/login")
+    @GetMapping("/loginModal")
     public String showLoginForm() {
-        return "login-front";  // This returns login.html
+        return "login-modalpage";  // This returns login-modalpage.html
     }
 
     // 👇 POST: Handles the login form submission
     // en session timeout er pr. default 15 minutter
-    @PostMapping("/login")
+
+    //loginModal der popper frem efter man har trykket på log ind.
+    @PostMapping("/loginModal")
     public String processLogin(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
         // Here, you would validate the user credentials (e.g., check DB)
         User user = userService.loginUser(email, password);
@@ -69,11 +71,11 @@ public class WishlistController {
             return "redirect:/list";
         } else {
             model.addAttribute("error", "Forkert email eller adgangskode");
-            return "login-front";
+            return "login-modalpage";
+
 
         }
     }
-
     // 👇 GET: Displays the welcome page after successful login
     @GetMapping("/welcome")
     public String showWelcomePage() {
