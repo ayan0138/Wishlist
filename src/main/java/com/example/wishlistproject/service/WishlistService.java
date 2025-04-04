@@ -24,4 +24,6 @@ public class WishlistService {
     public List<Wishlist> getAllWishList() {
         return wishlistRepository.findAll();
     }
+
+
 }
