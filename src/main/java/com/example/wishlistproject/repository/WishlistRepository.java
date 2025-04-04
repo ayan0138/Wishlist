@@ -1,14 +1,33 @@
 package com.example.wishlistproject.repository;
 
 import com.example.wishlistproject.model.Wishlist;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
 
 @Repository
-public interface WishlistRepository extends JpaRepository <Wishlist, Long> {
-    // Find alle ønskesedler for en bestemt bruger
-    List<Wishlist> findByUser_userId(Long userId);
+public class WishlistRepository  {
+    private final JdbcTemplate jdbcTemplate;
+
+    public WishlistRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public void save(String name, String description, Long userId) {
+        String sql = "INSERT INTO wishlist (name, description, userId) VALUES (?,?,?)";
+        jdbcTemplate.update(sql,name,description, userId);
+    }
+
+    public List<Wishlist> findAll() {
+        String sql = "SELECT * FROM wishlist";
+        return jdbcTemplate.query(sql,(rs, rowNum)-> {
+            Wishlist w = new Wishlist();
+            w.setWishlistId(rs.getLong("wishlist_id"));
+            w.setName(rs.getString("name"));
+            w.setDescription(rs.getString("description"));
+            w.setUserId(rs.getLong("user_Id"));
+            return w;
+        });
+    }
+
 }
-// Commit and push

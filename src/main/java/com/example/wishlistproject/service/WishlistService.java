@@ -11,34 +11,17 @@ import java.util.List;
 public class WishlistService {
 
     private final WishlistRepository wishlistRepository;
-    private final UserRepository userRepository;
 
     public WishlistService(WishlistRepository wishlistRepository, UserRepository userRepository) {
         this.wishlistRepository = wishlistRepository;
-        this.userRepository = userRepository;
+
     }
 
-    public Wishlist createWishlist(String name, String description, String imageUrl,Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Bruger ikke fundet"));
-
-        Wishlist wishlist = new Wishlist();
-        wishlist.setName(name);
-        wishlist.setDescription(description);
-        wishlist.setImageUrl(imageUrl);
-        wishlist.setUser(user);
-
-        return wishlistRepository.save(wishlist);
+    public void createWishlist(String name, String description, Long userId) {
+        wishlistRepository.save(name, description, userId);
     }
 
-    public Wishlist saveWishlist(Wishlist wishlist){
-       return wishlistRepository.save(wishlist); /** Save the wishlist object to the database **/
+    public List<Wishlist> getAllWishList() {
+        return wishlistRepository.findAll();
     }
-
-    // Hent alle ønskesedler for en bestemt bruger
-    public List<Wishlist> getWishlistsForUser(Long userId) {
-        return wishlistRepository.findByUser_userId(userId); // matcher repository
-    }
-
-
 }
