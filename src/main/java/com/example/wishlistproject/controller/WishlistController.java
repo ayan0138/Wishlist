@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-//hii
+//hiiiii
 @Controller
 @RequestMapping("/") // Previously ("/wishlist") -> removed!
 public class WishlistController {
