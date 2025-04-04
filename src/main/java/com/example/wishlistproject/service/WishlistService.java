@@ -14,6 +14,7 @@ public class WishlistService {
 
     public WishlistService(WishlistRepository wishlistRepository, UserRepository userRepository) {
         this.wishlistRepository = wishlistRepository;
+
     }
 
     public void createWishlist(String name, String description, Long userId) {
@@ -23,4 +24,6 @@ public class WishlistService {
     public List<Wishlist> getAllWishList() {
         return wishlistRepository.findAll();
     }
+
+
 }
