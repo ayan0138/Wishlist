@@ -63,5 +63,6 @@ public class UserRepository {
             user.setPassword(rs.getString("password"));
             return user;
         });
+        // JDBC DONE DEAL!!!
     }
 }
