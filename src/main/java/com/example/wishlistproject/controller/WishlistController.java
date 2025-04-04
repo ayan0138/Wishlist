@@ -76,8 +76,34 @@ public class WishlistController {
 
         }
     }
+
+    //opretModal der popper frem efter man har trykket på log ind.
+    @GetMapping("/opretModal")
+    public String showOpretForm() {
+        return "opret-modalpage";  // This returns login-modalpage.html
+    }
+
+    // 👇 POST: Handles the login form submission
+    // en session timeout er pr. default 15 minutter
+
+    //loginModal der popper frem efter man har trykket på log ind.
+    @PostMapping("/opretModal")
+    public String processOpret(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
+        // Here, you would validate the user credentials (e.g., check DB)
+        User user = userService.loginUser(email, password);
+
+        if (user !=null) {
+            session.setAttribute("userId", user.getUserId());
+            return "redirect:/list";
+        } else {
+            model.addAttribute("error", "Forkert email eller adgangskode");
+            return "opret-modalpage";
+
+
+        }
+    }
+
     // 👇 GET: Displays the welcome page after successful login
-    //ok
     @GetMapping("/welcome")
     public String showWelcomePage() {
         return "welcome";  // This renders the welcome page after login
