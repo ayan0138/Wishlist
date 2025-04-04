@@ -6,6 +6,7 @@ public class Wishlist {
 
     private String name;
     private String description;
+    private String imageUrl;
 
     private User user;
 
@@ -13,10 +14,11 @@ public class Wishlist {
     public Wishlist(){
     }
 
-    public Wishlist(Long wishlistId, String name, String description, User user) {
+    public Wishlist(Long wishlistId, String name, String description,String imageUrl, User user) {
         this.wishlistId = wishlistId;
         this.name = name;
         this.description = description;
+        this.imageUrl = imageUrl;
         this.user = user;
 
     }
@@ -36,6 +38,9 @@ public class Wishlist {
         return description;
     }
 
+    public String getImageUrl(){
+        return imageUrl;
+    }
 
 
     public void setWishlistId(Long wishlistId) {
@@ -48,6 +53,10 @@ public class Wishlist {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setImageUrl(String imageUrl){
+        this.imageUrl = imageUrl;
     }
 
     public User getUser() {

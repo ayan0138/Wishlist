@@ -1,0 +1,101 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Bodyy Styling */
+body {
+    font-family: GothamRounded, Poppins, Arial, sans-serif !important;
+    background-color: #f0f0f0;
+    height: 100vh; /* Full height */
+}
+
+
+/* Input Fields */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Log ud Button */
+.logout-btn {
+    width: 100%;
+    padding: 10px;
+    background: #00573F;
+    color: white;
+    border: none;
+    cursor: pointer;
+
+}
+
+/* Container for both header and navbar */
+.header-container {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #fff;
+}
+
+/* Navbar Styles */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Navbar links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    text-align: right;
+}
+
+.nav-links li {
+    margin: 0 15px; /* Space out the nav items */
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    text-align: right;
+}
+
+/* Heading Styles */
+h1 {
+    font-size: 2rem;
+    color: #00A86B; /* Color matching the button color */
+    margin-right: auto; /* Push the heading to the left side */
+    text-align: left; /* Align the h1 text left */
+}
+
+/* Auth buttons container */
+.auth-buttons {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+}
+
+/* Log ind button (Green) */
+.logout-btn {
+    background-color: #00573F; /* Green color */
+}
+
+.logout-btn:hover {
+    background-color: #003e2b; /* Darker green for hover effect */
+}
