@@ -1,19 +1,12 @@
 package com.example.wishlistproject.model;
 
-import jakarta.persistence.*;
 
-
-@Entity
 public class Wishlist {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wishlistId;
 
     private String name;
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
 
@@ -63,5 +56,8 @@ public class Wishlist {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setUserId(long userId) {
     }
 }

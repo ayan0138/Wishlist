@@ -1,13 +1,10 @@
 package com.example.wishlistproject.model;
 
-import jakarta.persistence.*;
-
 import java.util.List;
 
-@Entity
+
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long userId;
 
     private String email;
@@ -15,7 +12,7 @@ public class User {
     private String password;
 
     // En bruger kan have flere ønskesedler
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+
     private List<Wishlist> wishlists;
 
     public User(int i, String mail, String ayan, String hashedPassword1) {
