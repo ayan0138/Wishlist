@@ -17,7 +17,7 @@ public class UserRepository {
 
 
     public Optional<User> save(User user) {
-        String sql = "INSERT INTO Users (name, email, password) VALUE (?, ?, ?)";
+        String sql = "INSERT INTO Users (name, email, password) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword());
         Long lastId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Long.class); /** Hent det sidst indsatte ID **/
         return findById(lastId); /** Returner den oprettede bruger **/
@@ -66,5 +66,12 @@ public class UserRepository {
             return user;
         });
         // JDBC DONE DEAL!!!
+    }
+
+    //Tilpas konto Oplysninger
+    public void updatedUser (User user){
+        String sql = "UPDATE users SET name = ?, email = ?, password = ?   WHERE user_id = ?";
+        jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword(), user.getUserId());
+
     }
 }

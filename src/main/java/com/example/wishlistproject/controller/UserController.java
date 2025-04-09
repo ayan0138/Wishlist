@@ -2,7 +2,6 @@ package com.example.wishlistproject.controller;
 import com.example.wishlistproject.model.User;
 import com.example.wishlistproject.service.UserService;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,21 +13,21 @@ public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService){
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
-   @PostMapping("/register")
-    public String registerUser(@RequestBody User user){
-       boolean success = userService.registerUser(user);
-       return success ? "Bruger oprettet" : "Email eksisterer allerede.";
-   }
+    @PostMapping("/register")
+    public String registerUser(@RequestBody User user) {
+        boolean success = userService.registerUser(user);
+        return success ? "Bruger oprettet" : "Email eksisterer allerede.";
+    }
 
-   @GetMapping("/logout")
-    public String logout(HttpSession session){
-       session.invalidate();
-       return "logout";
-   }
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "logout";
+    }
 
     //  GET: Displays the login form
     @GetMapping("/loginModal")
@@ -45,7 +44,7 @@ public class UserController {
         // Here, you would validate the user credentials (e.g., check DB)
         User user = userService.loginUser(email, password);
 
-        if (user !=null) {
+        if (user != null) {
             session.setAttribute("userId", user.getUserId());
             return "redirect:/wishlist/list";
         } else {
@@ -58,7 +57,7 @@ public class UserController {
     // Opret Modal, der popper frem efter man har trykket på log ind.
     @GetMapping("/opretModal")
     public String showOpretForm(Model model) {
-        model.addAttribute("user",new User());
+        model.addAttribute("user", new User());
         return "opret-modalpage";
     }
 
@@ -83,5 +82,28 @@ public class UserController {
     @GetMapping("/welcome")
     public String showWelcomePage() {
         return "welcome";  // This renders the welcome page after login
+    }
+
+    //Opdater konto Oplysninger:
+
+    @GetMapping("/user/edit")
+    public String showEditForm(Model model, HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/loginModal";
+        }
+
+        User user = userService.findUserById(userId);
+        if (user == null){
+            return "redirect:/loginModal";
+        }
+        model.addAttribute("user", user);
+        return "edit-user";
+    }
+
+    @PostMapping("/user/update")
+    public String updateUser(@ModelAttribute User user, HttpSession session) {
+        userService.updateUser(user);
+        return "redirect:/wishlist/list";
     }
 }

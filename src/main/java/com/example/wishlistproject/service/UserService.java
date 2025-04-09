@@ -61,5 +61,14 @@ public class UserService {
         }
     }
 
+    //tilpas konto Oplysninger
+    public void updateUser(User user){
+        userRepository.updatedUser(user);
+    }
+
+    public User findUserById(Long id){
+        return userRepository.findById(id).orElse(null);
+    }
+
 
 }

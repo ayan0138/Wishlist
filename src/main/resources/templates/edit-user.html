@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Opdater Konto</title>
+    <link rel="stylesheet" href="/css/edit-user.css">
+</head>
+<body>
+
+<div class="center-wrapper">
+    <h1>Opdater dine oplysninger her:</h1>
+
+    <th:block th:if="${user != null}">
+        <form action="/user/update" method="post">
+            <input type="hidden" name="userId" th:value="${user.userId}" />
+
+            <label>Navn:</label>
+            <input type="text" name="name" th:value="${user.name}" required><br>
+
+            <label>Email:</label>
+            <input type="email" name="email" th:value="${user.email}" required><br>
+
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Indtast nyt kodeord">
+
+            <button type="submit">Gem</button>
+        </form>
+    </th:block>
+
+    <th:block th:if="${user == null}">
+        <p>Brugerinformation kunne ikke indlæses. Prøv at logge ind igen.</p>
+    </th:block>
+</div>
+
+</body>
+</html>
